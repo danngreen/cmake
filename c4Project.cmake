@@ -2690,6 +2690,7 @@ include(CMakeFindDependencyMacro)
         set(case ${CMAKE_CURRENT_BINARY_DIR}/export_cases/${cfg_dst})
         file(MAKE_DIRECTORY ${case})
         #
+        cmake_policy(SET CMP0177 OLD)
         install(EXPORT "${_TARGET}"
             FILE "${targets_file}"
             NAMESPACE "${_NAMESPACE}"
