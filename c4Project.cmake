@@ -2690,10 +2690,11 @@ include(CMakeFindDependencyMacro)
         set(case ${CMAKE_CURRENT_BINARY_DIR}/export_cases/${cfg_dst})
         file(MAKE_DIRECTORY ${case})
         #
+        cmake_path(SET cfg_dst_normalized NORMALIZE "${cfg_dst}")
         install(EXPORT "${_TARGET}"
             FILE "${targets_file}"
             NAMESPACE "${_NAMESPACE}"
-            DESTINATION "${cfg_dst}")
+            DESTINATION "${cfg_dst_normalized}")
         export(EXPORT ${_TARGET}
             FILE "${targets_file}"
             NAMESPACE "${_NAMESPACE}")
@@ -2742,7 +2743,8 @@ check_required_components(${_c4_lcprefix})
             VERSION ${${_c4_uprefix}VERSION}
             COMPATIBILITY AnyNewerVersion
         )
-        install(FILES ${cfg} ${cfg_ver} DESTINATION ${cfg_dst})
+        cmake_path(SET cfg_dst_normalized NORMALIZE "${cfg_dst}")
+        install(FILES ${cfg} ${cfg_ver} DESTINATION ${cfg_dst_normalized})
     endmacro(__c4_install_exports)
     #
     # To install the exports:
